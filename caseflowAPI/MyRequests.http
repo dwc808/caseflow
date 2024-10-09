@@ -1,0 +1,17 @@
+POST http://localhost:5149/createstudent
+content-type: application/json
+
+{
+    "name": "John S.",
+    "teacher": "Harbold"
+}
+
+###
+
+POST http://localhost:5149/createblock
+content-type: application/json
+
+{
+    "time": "9:15",
+    "grade": "3"
+}
