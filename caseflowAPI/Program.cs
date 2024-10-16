@@ -1,26 +1,60 @@
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using caseFlow.Models;
 
-using var db = new CaseflowContext();
 
 var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
+var connectionString = builder.Configuration.GetConnectionString("caseFlow") ?? "Data Source=caseFlow.db";
 
-app.MapPost("/createstudent", (Student studentInfo) =>
+builder.Services.AddSqlite<caseFlowDb>(connectionString);
+
+var app = builder.Build();  
+
+
+
+/*current endpoints - will need to be divvied up into other files later */
+
+//get list of students
+app.MapGet("/students", async (caseFlowDb db) => await db.Students.ToListAsync());
+
+//create a student
+app.MapPost("/addstudent", async (caseFlowDb db, Student student) =>
 {
-    db.Add(new Student {Name = studentInfo.Name, Teacher = studentInfo.Teacher} );
-    db.SaveChanges();
-    return TypedResults.Created("New Student Added");
-});  
+    await db.Students.AddAsync(student);
+    await db.SaveChangesAsync();
+    return Results.Created($"/student/{student.Id}", student);
+});
 
-app.MapPost("/createblock", (Block blockInfo) =>
+//get a student by id
+app.MapGet("/student/{id}", async (caseFlowDb db, int id) => await db.Students.FindAsync(id));
+
+//update a student
+app.MapPut("/student/{id}", async (caseFlowDb db, Student updatestudent, int id) =>
 {
-    db.Add(new Block {Time = blockInfo.Time, Grade = blockInfo.Grade} );
-    db.SaveChanges();
-    return TypedResults.Created("New Block Added");
-});  
+    var student = await db.Students.FindAsync(id);
+    if (student is null) return Results.NotFound();
+    student.Name = updatestudent.Name;
+    student.Teacher = updatestudent.Teacher;
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+});
 
+//delete a student
+app.MapDelete("/student/{id}", async (caseFlowDb db, int id) =>
+{
+    var student = await db.Students.FindAsync(id);
+    if (student is null)
+    {
+        return Results.NotFound();
+    };
+    db.Students.Remove(student);
+    await db.SaveChangesAsync();
+    return Results.Ok();
+});
 
 app.Run();
 

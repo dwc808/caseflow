@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace caseflowAPI.Migrations
 {
-    [DbContext(typeof(CaseflowContext))]
-    [Migration("20241009013247_ChangedBlockTimeType")]
-    partial class ChangedBlockTimeType
+    [DbContext(typeof(caseFlowDb))]
+    [Migration("20241016234335_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,61 +18,38 @@ namespace caseflowAPI.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
 
-            modelBuilder.Entity("Block", b =>
+            modelBuilder.Entity("caseFlow.Models.Block", b =>
                 {
-                    b.Property<int>("BlockId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Grade")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Time")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("BlockId");
+                    b.HasKey("Id");
 
                     b.ToTable("Blocks");
                 });
 
-            modelBuilder.Entity("Student", b =>
+            modelBuilder.Entity("caseFlow.Models.Student", b =>
                 {
-                    b.Property<int>("StudentId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Teacher")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("StudentId");
+                    b.HasKey("Id");
 
                     b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("HashedPassword")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

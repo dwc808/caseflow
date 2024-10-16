@@ -1,44 +1,31 @@
+using caseFlow.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 
-public class CaseflowContext : DbContext
+namespace caseFlow.Models
 {
-    public DbSet<User> Users { get; set; }
-    public DbSet<Block> Blocks { get; set; }
-    public DbSet<Student> Students { get; set; }
-
-    public string DbPath { get; }
-
-    public CaseflowContext()
+    public class Student
     {
-        var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder);
-        DbPath = System.IO.Path.Join(path, "caseflow.db");
+        public int Id {get; set;}
+        public string? Name {get; set;}
+        public string? Teacher {get; set;}
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlite($"Data Source={DbPath}");
+    public class Block
+    {
+        public int Id {get; set;}
+        public string? Time {get; set;}
+        public string? Grade {get; set;}
+    }
 }
 
-public class User
+class caseFlowDb : DbContext
 {
-    public int UserId {get; set;}
-    public string Email {get; set;}
-    public string HashedPassword {get; set;}
-}
-
-public class Student
-{
-    public int StudentId {get; set;}
-    public string Name {get; set;}
-    public string Teacher {get; set;}
-}
-
-public class Block
-{
-    public int BlockId {get; set;}
-    public string Time {get; set;}
-    public string Grade {get; set;}
+    public caseFlowDb(DbContextOptions options) : base(options) { }
+    public DbSet<Student> Students {get; set; } = null!;
+    public DbSet<Block> Blocks {get; set; } = null!;
 }
