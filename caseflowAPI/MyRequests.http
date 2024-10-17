@@ -41,3 +41,24 @@ DELETE http://localhost:5149/student/2
 content-type: application/json
 
 {}
+
+###
+//register a user
+POST http://localhost:5149/register/
+content-type: application/json
+
+{
+    "email": "dc.1989@gmail.com",
+    "password": "Bl@hbl4h"
+}
+
+###
+//login to user account
+
+POST http://localhost:5149/login/
+Content-Type: application/json
+
+{
+    "email": "dc.1989@gmail.com",
+    "password": "Bl@hbl4h"
+}

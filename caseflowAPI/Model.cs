@@ -23,7 +23,7 @@ namespace caseFlow.Models
     }
 }
 
-class caseFlowDb : DbContext
+public class caseFlowDb : IdentityDbContext<IdentityUser>
 {
     public caseFlowDb(DbContextOptions options) : base(options) { }
     public DbSet<Student> Students {get; set; } = null!;

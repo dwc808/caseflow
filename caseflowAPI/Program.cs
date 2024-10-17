@@ -8,13 +8,18 @@ using caseFlow.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddEntityFrameworkStores<caseFlowDb>();
+
+builder.Services.AddAuthorization();
+
 var connectionString = builder.Configuration.GetConnectionString("caseFlow") ?? "Data Source=caseFlow.db";
 
 builder.Services.AddSqlite<caseFlowDb>(connectionString);
 
 var app = builder.Build();  
 
-
+app.MapIdentityApi<IdentityUser>();
 
 /*current endpoints - will need to be divvied up into other files later */
 
@@ -41,7 +46,8 @@ app.MapPut("/student/{id}", async (caseFlowDb db, Student updatestudent, int id)
     student.Teacher = updatestudent.Teacher;
     await db.SaveChangesAsync();
     return Results.NoContent();
-});
+})
+.RequireAuthorization();
 
 //delete a student
 app.MapDelete("/student/{id}", async (caseFlowDb db, int id) =>
