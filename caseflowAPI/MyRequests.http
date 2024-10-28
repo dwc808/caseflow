@@ -1,3 +1,29 @@
+POST http://localhost:5149/addblock
+content-type: application/json
+
+{
+    "Time": "10:00",
+    "Grade": "4th"
+}
+
+###
+POST http://localhost:5149/addblock
+content-type: application/json
+
+{
+    "Time": "11:00",
+    "Grade": "3rd"
+}
+
+###
+GET http://localhost:5149/blocks
+content-type: application/json
+
+###
+GET http://localhost:5149/currentuser
+content-type: application/json
+
+###
 GET http://localhost:5149/students
 content-type: application/json
 
