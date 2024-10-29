@@ -6,16 +6,22 @@ import ViewBlocks from "./ViewBlocks"
 import ViewStudents from "./ViewStudents"
 import Register from "./Register"
 import Login from "./Login"
+import AddStudent from "./AddStudent"
+import AddBlock from "./AddBlock"
+import Header from "./Header"
+import Footer from "./Footer"
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
-      <p>Register</p>
-      <Register />
-      <p>Login</p>
-      <Login />
+      <Header />
+      <p>Add Student</p>
+      <AddStudent />
+      <p>Add Block</p>
+      <AddBlock />
+      <Footer />
     </>
   )
 }

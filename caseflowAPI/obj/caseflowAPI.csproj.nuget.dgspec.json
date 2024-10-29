@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dc198\\Documents\\Core\\Projects\\caseflow\\caseflowapi\\caseflowAPI.csproj": {}
+    "C:\\Users\\dc198\\Documents\\Core\\Projects\\caseflow\\caseflowAPI\\caseflowAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dc198\\Documents\\Core\\Projects\\caseflow\\caseflowapi\\caseflowAPI.csproj": {
+    "C:\\Users\\dc198\\Documents\\Core\\Projects\\caseflow\\caseflowAPI\\caseflowAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dc198\\Documents\\Core\\Projects\\caseflow\\caseflowapi\\caseflowAPI.csproj",
+        "projectUniqueName": "C:\\Users\\dc198\\Documents\\Core\\Projects\\caseflow\\caseflowAPI\\caseflowAPI.csproj",
         "projectName": "caseflowAPI",
-        "projectPath": "C:\\Users\\dc198\\Documents\\Core\\Projects\\caseflow\\caseflowapi\\caseflowAPI.csproj",
+        "projectPath": "C:\\Users\\dc198\\Documents\\Core\\Projects\\caseflow\\caseflowAPI\\caseflowAPI.csproj",
         "packagesPath": "C:\\Users\\dc198\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dc198\\Documents\\Core\\Projects\\caseflow\\caseflowapi\\obj\\",
+        "outputPath": "C:\\Users\\dc198\\Documents\\Core\\Projects\\caseflow\\caseflowAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dc198\\AppData\\Roaming\\NuGet\\NuGet.Config"
