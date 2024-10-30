@@ -14,3 +14,8 @@ header {
   padding: 0;
 
 }
+
+footer {
+  background-color: seagreen;
+  height: 100px;
+}

@@ -34,7 +34,7 @@ const ViewStudents = () => {
 
     return (
         <div className="ViewStudents">
-            <h1>Schedule</h1>
+            <h1>Roster</h1>
             {Students.map(student => {
                 return <Student {...student} key={student.id}/>;
             })}
