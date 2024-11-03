@@ -13,6 +13,7 @@ namespace caseFlow.Models
         public int Id {get; set;}
         public string? Name {get; set;}
         public string? Teacher {get; set;}
+        public List<Block> Blocks {get;} = [];
     }
 
     public class Block
@@ -20,7 +21,10 @@ namespace caseFlow.Models
         public int Id {get; set;}
         public string? Time {get; set;}
         public string? Grade {get; set;}
+        public List<Student> Students {get;} = [];
     }
+
+    
 }
 
 public class caseFlowDb : IdentityDbContext<IdentityUser>

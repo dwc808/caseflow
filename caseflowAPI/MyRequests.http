@@ -1,3 +1,15 @@
+POST http://localhost:5149/schedulestudent/2
+content-type: application/json
+
+
+   {
+    "Id": 1,
+    "Name": "BeeBop Foo",
+    "Teacher": "Adams"
+    }
+
+###
+
 POST http://localhost:5149/addblock
 content-type: application/json
 
@@ -53,12 +65,12 @@ content-type: application/json
 
 ###
 //update a student
-PUT http://localhost:5149/student/2
+PUT http://localhost:5149/student/3
 content-type: application/json
 
 {
-    "id": 2,
-    "Name": "Borgo Fonkers"
+    "Name": "Borgo Fonkers",
+    "Teacher": "Lorngings"
 }
 
 ###

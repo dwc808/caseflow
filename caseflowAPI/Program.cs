@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using caseFlow.Models;
 using Microsoft.VisualBasic;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.AspNetCore.Mvc;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -16,13 +18,19 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                         policy  =>
                         {
-                            policy.WithOrigins("http://localhost:5173")
-                                .AllowAnyHeader();
+                            policy.WithOrigins("http://localhost:5173",
+                                                "http://localhost:5173/")
+                                .AllowAnyHeader()
+                                .AllowCredentials()
+                                .AllowAnyMethod();
                         });
 });
 
+
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<caseFlowDb>();
+
+
 
 builder.Services.AddAuthorization();
 
@@ -32,7 +40,11 @@ builder.Services.AddSqlite<caseFlowDb>(connectionString);
 
 var app = builder.Build();  
 
+app.UseCors(MyAllowSpecificOrigins);
+
 app.MapIdentityApi<IdentityUser>();
+
+
 
 /*current endpoints - will need to be divvied up into other files later */
 app.MapGet("/currentuser", (HttpContext httpContext) =>
@@ -45,7 +57,7 @@ app.MapGet("/currentuser", (HttpContext httpContext) =>
         return Results.Ok(new { UserId = userId, UserName = userName });
     }
     return Results.Unauthorized();
-}).RequireAuthorization();
+});
 
 //get list of students
 app.MapGet("/students", async (caseFlowDb db) => await db.Students.ToListAsync());
@@ -69,8 +81,25 @@ app.MapPost("/addblock", async (caseFlowDb db, Block block) =>
     return Results.Created($"/block/{block.Id}", block);
 });
 
+//connect a student and block
+app.MapPost("/schedulestudent/{bid}", async (caseFlowDb db, Student student, int bid) =>
+{
+    var stu = await db.Students.FindAsync(student.Id);
+    var blk = await db.Blocks.FindAsync(bid);
+
+    if (stu != null && blk != null)
+    {
+        stu.Blocks.Add(blk);
+        await db.SaveChangesAsync();
+    }
+    
+});
+
 //get a student by id
 app.MapGet("/student/{id}", async (caseFlowDb db, int id) => await db.Students.FindAsync(id));
+
+//get a block by id
+app.MapGet("/block/{id}", async (caseFlowDb db, int id) => await db.Blocks.FindAsync(id));
 
 //update a student
 app.MapPut("/student/{id}", async (caseFlowDb db, Student updatestudent, int id) =>
@@ -81,8 +110,8 @@ app.MapPut("/student/{id}", async (caseFlowDb db, Student updatestudent, int id)
     student.Teacher = updatestudent.Teacher;
     await db.SaveChangesAsync();
     return Results.NoContent();
-})
-.RequireAuthorization();
+});
+
 
 //delete a student
 app.MapDelete("/student/{id}", async (caseFlowDb db, int id) =>
@@ -97,7 +126,7 @@ app.MapDelete("/student/{id}", async (caseFlowDb db, int id) =>
     return Results.Ok();
 });
 
-app.UseCors(MyAllowSpecificOrigins);
+
 
 app.Run();
 

@@ -7,12 +7,19 @@ import Root from "./routes/root"
 import Home from "./routes/Home"
 import Login from "./routes/Login"
 import Register from "./routes/Register"
+import AddStudent from "./routes/AddStudent"
+import AddStudentsToBlock from './routes/AddStudentsToBlock'
+import AddStudentToBlocks from './routes/AddStudentToBlocks'
+import SelectBlock from './SelectBlock'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom"
+import axios from 'axios'
 import './index.css'
 import App from './App.jsx'
+
+axios.defaults.withCredentials = true;
 
 const router = createBrowserRouter([
   {
@@ -32,6 +39,18 @@ const router = createBrowserRouter([
         path: "register",
         element: <Register />,
       },
+      {
+        path: "addstudents",
+        element: <AddStudentsToBlock />
+      },
+      {
+        path: "addtoblock",
+        element: <AddStudentToBlocks />
+      },
+      {
+        path: "addstudent",
+        element: <AddStudent />
+      }
     ]
   },
   

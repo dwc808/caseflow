@@ -13,14 +13,13 @@ const ViewStudents = () => {
 
     const[Students, setStudents] = useState([]);
 
-    console.log(Students)
 
     useEffect(() => {
         getStudents();
     },[]);
 
     const getStudents = () => {
-        axios.get(url)
+        axios.get(url, { withCredentials: true })
         .then(res => setStudents(res.data))
         .catch(error => {console.log(error.response);});
     };

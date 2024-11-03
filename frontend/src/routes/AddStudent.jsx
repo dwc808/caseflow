@@ -11,7 +11,7 @@ export default function AddStudent() {
     return (
         <div>
             <form onSubmit={handleSubmit((data) => {
-                axios.post(url, data)
+                axios.post(url, data, {withCredentials: true})
             })}
             >
                 <input {...register("name", {required: true})} 

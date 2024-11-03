@@ -2,6 +2,7 @@ import Block from "./Block";
 import axios from 'axios';
 import { useEffect, useState } from "react";
 
+
 /*hardcode in api endpoints for now?*/
 const url = 'http://localhost:5149/blocks'
 
@@ -20,7 +21,7 @@ const ViewBlocks = () => {
     },[]);
 
     const getBlocks = () => {
-        axios.get(url)
+        axios.get(url, { withCredentials: true })
         .then(res => setBlocks(res.data))
         .catch(error => {console.log(error.response);});
     };
