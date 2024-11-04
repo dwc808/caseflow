@@ -8,9 +8,9 @@ import Home from "./routes/Home"
 import Login from "./routes/Login"
 import Register from "./routes/Register"
 import AddStudent from "./routes/AddStudent"
+import AddBlock from "./routes/AddBlock"
 import AddStudentsToBlock from './routes/AddStudentsToBlock'
 import AddStudentToBlocks from './routes/AddStudentToBlocks'
-import SelectBlock from './SelectBlock'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -50,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "addstudent",
         element: <AddStudent />
+      },
+      {
+        path: "addblock",
+        element: <AddBlock />
       }
     ]
   },

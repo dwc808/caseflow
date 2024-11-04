@@ -1,4 +1,4 @@
-POST http://localhost:5149/schedulestudent/2
+POST http://localhost:5149/schedulestudents/4
 content-type: application/json
 
 
@@ -6,6 +6,18 @@ content-type: application/json
     "Id": 1,
     "Name": "BeeBop Foo",
     "Teacher": "Adams"
+    }
+
+###
+
+POST http://localhost:5149/scheduleastudent/4
+content-type: application/json
+
+
+   {
+    "Id": 3,
+    "Time": "11:30 AM",
+    "Grade": "3rd Grade"
     }
 
 ###

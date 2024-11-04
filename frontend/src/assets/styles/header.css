@@ -1,0 +1,16 @@
+header {
+    height: 150px;
+    width: 100%;
+    background-color: #0D4A3A;
+    text-align: left;
+    display:flex;
+    color: rgba(255, 255, 255, 0.877);
+    font-size:larger;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 {
+    margin-left: 5%;
+    font-size: 300%;
+  }

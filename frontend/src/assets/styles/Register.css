@@ -1,0 +1,25 @@
+.Register {
+    background-color: #2D5731;
+    border-radius: 5%;
+    margin: 2% 20% 5% 42%;
+    padding: 2% 10% 2% 15%;
+    align-content: right;
+    align-items: right;
+    color: rgba(255, 255, 255, 0.877);
+    font-size:larger;
+}
+
+.backtologin {
+    text-align: right;
+    margin-right: 5%;
+    margin-bottom: 3%;
+}
+
+button {
+    width: 125px;
+    background-color: #7B6823;
+    border-radius: 10%;
+    border: none;
+    color: rgba(255, 255, 255, 0.877);
+    font-size: large;
+}

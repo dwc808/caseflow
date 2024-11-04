@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Select from 'react-select';
+import {useNavigate} from "react-router-dom"
 import { useEffect, useState } from 'react';
 
 /*hardcode in api endpoints for now?*/
@@ -8,7 +9,8 @@ const url = 'http://localhost:5149/students';
 /*get Students here*/
 
 export default function SelectStudents(blockid) {
-
+    const navigate = useNavigate();
+    var bid = parseInt(blockid.blockid)
     const [Students, setStudents] = useState([]);
 
     useEffect(() => {
@@ -48,13 +50,19 @@ export default function SelectStudents(blockid) {
         }
         else {
             for (const student of Selected.value) {
-                axios.post(`http://localhost:5149/schedulestudent/${blockid["blockid"]}`, student.value)
-                .then(response => {
-                    console.log('Form submitted successfully:', response.data);
+                axios.post(`http://localhost:5149/schedulestudents/${bid}`, student.value)
+                .then((response) => {
+                    var student = response.data
+                    console.log(student)
+                    if(response.status === 200) {
+                        console.log(response.status)
+                        //TODO: A message to indicate student was created successfully (showing a little card with the new student would be nice)
+                        setTimeout(() => {
+                            navigate('/home');
+                        }, 2000);
+                        //TODO: Add an error check and a message that explains what went wrong.
+                    }
                 })
-                .catch(error => {
-                    console.error('Error submitting form:', error)
-                });
             };
         };
     };
@@ -64,9 +72,6 @@ export default function SelectStudents(blockid) {
             <p>Select the student(s) that you would like to add.</p>
             <form onSubmit={handleSubmit}>
                 <Select isMulti options={Students} onChange={handleChange} />
-                {
-                    Selected.value === null ? "" : Selected.value.map(v => <h4>{v.label}</h4>)
-                }
                 <button type="submit">Submit</button>
             </form>
         </div>

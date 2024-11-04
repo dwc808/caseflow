@@ -1,14 +1,21 @@
 import axios from 'axios'
 import Student from '../Student'
 import SelectBlock from '../SelectBlock'
-import { useForm } from "react-hook-form"
+import { useLocation } from 'react-router-dom'
+
+
 
 
 export default function AddStudentToBlocks() {
+    
+    const {state} = useLocation();
+    const {student} = state;
+    console.log(student);
+    
     return(
         <div>
-            <Student id={1} />
-            <SelectBlock studentid={1} />
+            <Student {...student} />
+            <SelectBlock studentid={student.id} />
         </div>
         
     );

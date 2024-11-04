@@ -1,0 +1,25 @@
+.AddBlock {
+    background-color: #2D5731;
+    border-radius: 5%;
+    width: 10%;
+    margin: auto;
+    margin-top: 4%;
+    margin-bottom: 5%;
+    padding: 2% 5% 2% 5%;
+    align-content: right;
+    align-items: right;
+    color: rgba(255, 255, 255, 0.877);
+    font-size:larger;
+}
+
+#cancelblock {
+    width: 125px;
+    height: 50px;
+    margin-left: 20%;
+    margin-bottom: 2%;
+    background-color: #7B6823;
+    border-radius: 10%;
+    border: none;
+    color: rgba(255, 255, 255, 0.877);
+    font-size: large;
+}

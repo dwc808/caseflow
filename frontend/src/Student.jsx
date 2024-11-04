@@ -1,3 +1,5 @@
+import './assets/styles/student.css'
+
 export default function Student({name, teacher, id}) {
     return (
         <div className="Student">

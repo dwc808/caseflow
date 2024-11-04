@@ -1,3 +1,5 @@
+import './assets/styles/block.css'
+
 export default function Block({time, grade, id}) {
         return (
             <div className="Block">

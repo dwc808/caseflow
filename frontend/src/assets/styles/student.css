@@ -1,0 +1,18 @@
+.Student {
+    background-color: #2D5731;
+    color: rgba(255, 255, 255, 0.877);
+    border-radius: 5%;
+    width: 350px;
+    font-size: smaller;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 5px;
+}
+
+.AddTitle {
+    text-align: center;
+}
+
+#warning {
+    text-align: center;
+}

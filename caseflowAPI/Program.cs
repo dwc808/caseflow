@@ -82,7 +82,7 @@ app.MapPost("/addblock", async (caseFlowDb db, Block block) =>
 });
 
 //connect a student and block
-app.MapPost("/schedulestudent/{bid}", async (caseFlowDb db, Student student, int bid) =>
+app.MapPost("/schedulestudents/{bid}", async (caseFlowDb db, Student student, int bid) =>
 {
     var stu = await db.Students.FindAsync(student.Id);
     var blk = await db.Blocks.FindAsync(bid);
@@ -92,7 +92,19 @@ app.MapPost("/schedulestudent/{bid}", async (caseFlowDb db, Student student, int
         stu.Blocks.Add(blk);
         await db.SaveChangesAsync();
     }
-    
+});
+
+//connect a student and block
+app.MapPost("/scheduleastudent/{sid}", async (caseFlowDb db, Block block, int sid) =>
+{
+    var blk = await db.Blocks.FindAsync(block.Id);
+    var stu = await db.Students.FindAsync(sid);
+
+    if (stu != null && blk != null)
+    {
+        blk.Students.Add(stu);
+        await db.SaveChangesAsync();
+    }
 });
 
 //get a student by id

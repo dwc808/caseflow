@@ -1,6 +1,8 @@
 import Block from "./Block";
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 import { useEffect, useState } from "react";
+import './assets/styles/viewblocks.css'
 
 
 /*hardcode in api endpoints for now?*/
@@ -12,6 +14,7 @@ console.log("Starting")
 
 const ViewBlocks = () => {
 
+    const navigate = useNavigate();
     const[blocks, setBlocks] = useState([]);
 
     console.log(blocks)
@@ -33,12 +36,18 @@ const ViewBlocks = () => {
         </div>
     );
 
+    const handleButtonClick = () => {
+        navigate('/addblock')
+    }
+
     return (
         <div className="ViewBlocks">
             <h1>Schedule</h1>
             {blocks.map(block => {
                 return <Block {...block} key={block.id}/>;
             })}
+
+            <button id="submitblock" onClick={handleButtonClick}>Add Block</button>
         </div>    
     );    
 }
