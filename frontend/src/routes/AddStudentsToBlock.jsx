@@ -2,6 +2,7 @@ import axios from 'axios'
 import Block from "../Block"
 import SelectStudents from '../SelectStudents'
 import { useLocation } from 'react-router-dom'
+import '../assets/styles/AddToBlock.css'
 
 
 /*hardcode in api endpoints for now?*/
@@ -15,7 +16,7 @@ export default function AddStudentsToBlock(blockid) {
     console.log(block);
 
     return (
-        <div>
+        <div className="AddToBlock">
             <Block {...block}/>
             <SelectStudents blockid={block.id}/>
         </div>

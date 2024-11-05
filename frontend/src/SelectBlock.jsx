@@ -2,6 +2,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import {useNavigate} from "react-router-dom"
 import { useEffect, useState } from 'react';
+import './assets/styles/SelectBlock.css'
 
 /*hardcode in api endpoints for now?*/
 const url = 'http://localhost:5149/blocks';
@@ -70,7 +71,7 @@ export default function SelectBlock(studentid) {
     };
 
     return (
-        <div>
+        <div className="selectblocks">
             <p>Select the block that you would like to add your student to.</p>
             <form onSubmit={handleSubmit}>
                 <Select options={Blocks} onChange={handleChange} />

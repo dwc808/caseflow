@@ -10,14 +10,29 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace caseflowAPI.Migrations
 {
     [DbContext(typeof(caseFlowDb))]
-    [Migration("20241016235336_identity")]
-    partial class identity
+    [Migration("20241105003321_restart")]
+    partial class restart
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
+
+            modelBuilder.Entity("BlockStudent", b =>
+                {
+                    b.Property<int>("BlocksId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("StudentsId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("BlocksId", "StudentsId");
+
+                    b.HasIndex("StudentsId");
+
+                    b.ToTable("BlockStudent");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -243,6 +258,21 @@ namespace caseflowAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("BlockStudent", b =>
+                {
+                    b.HasOne("caseFlow.Models.Block", null)
+                        .WithMany()
+                        .HasForeignKey("BlocksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("caseFlow.Models.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

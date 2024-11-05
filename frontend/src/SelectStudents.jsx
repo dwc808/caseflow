@@ -2,6 +2,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import {useNavigate} from "react-router-dom"
 import { useEffect, useState } from 'react';
+import './assets/styles/SelectStudent.css';
 
 /*hardcode in api endpoints for now?*/
 const url = 'http://localhost:5149/students';
@@ -68,7 +69,7 @@ export default function SelectStudents(blockid) {
     };
 
     return (
-        <div>
+        <div className="selectstudents">
             <p>Select the student(s) that you would like to add.</p>
             <form onSubmit={handleSubmit}>
                 <Select isMulti options={Students} onChange={handleChange} />

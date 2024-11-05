@@ -29,17 +29,19 @@ const ViewBlocks = () => {
         .catch(error => {console.log(error.response);});
     };
 
-    if (blocks.length == 0) return (
-        <div>
-            <h1>Schedule</h1>
-            <p>There are no blocks currently scheduled.</p>
-        </div>
-    );
-
     const handleButtonClick = () => {
         navigate('/addblock')
     }
 
+    if (blocks.length == 0) return (
+        <div>
+            <h1>Schedule</h1>
+            <p>There are no blocks currently scheduled.</p>
+            <button id="submitblock" onClick={handleButtonClick}>Add Block</button>
+        </div>
+    );
+
+    
     return (
         <div className="ViewBlocks">
             <h1>Schedule</h1>

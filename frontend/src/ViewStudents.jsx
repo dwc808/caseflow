@@ -33,17 +33,20 @@ const ViewStudents = () => {
         .catch(error => {console.log(error.response);});
     };
 
-    if (Students.length == 0) return (
-        <div>
-            <h1>Roster</h1>
-            <p>There are no Students currently scheduled.</p>
-        </div>
-    );
-
     const handleButtonClick = () => {
         navigate('/addstudent')
     }
 
+
+    if (Students.length == 0) return (
+        <div>
+            <h1>Roster</h1>
+            <p>There are no Students currently scheduled.</p>
+            <button id="submitstudent" onClick={handleButtonClick}>Add Student</button>
+        </div>
+    );
+
+   
     //TODO - Anchor the h1s and make the rest scrollable
     return (   
         <div className="ViewStudents">
@@ -54,6 +57,7 @@ const ViewStudents = () => {
             })}
             
             <button id="submitstudent" onClick={handleButtonClick}>Add Student</button>
+            
         </div>    
     );    
 }

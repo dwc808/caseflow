@@ -1,0 +1,12 @@
+.selectstudents {
+    width: 50%;
+    justify-content:center;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+button {
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
