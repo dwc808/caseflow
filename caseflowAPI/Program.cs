@@ -8,6 +8,9 @@ using caseFlow.Models;
 using Microsoft.VisualBasic;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.AspNetCore.Mvc;
+using NetMQ.Sockets;
+using NetMQ;
+using System.Text.Json;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -137,6 +140,49 @@ app.MapDelete("/student/{id}", async (caseFlowDb db, int id) =>
     await db.SaveChangesAsync();
     return Results.Ok();
 });
+
+///////////Routes for reaching out to microservices via ZeroMQ////////////
+
+//generate a graph
+
+
+//run the schedule assistant
+
+
+//report outcomes
+app.MapPost("/outcomes", ([FromBody]Object request) =>
+{
+    string req = JsonSerializer.Serialize(request);
+    Console.WriteLine(request);
+    using (var client = new RequestSocket())
+    {
+        client.Connect("tcp://localhost:5558");
+        client.SendFrame(req);
+        var msg = client.ReceiveFrameString();
+        return msg;
+    }
+});
+
+//get outcomes
+app.MapGet("/outcomes", () =>
+{
+    Dictionary<string, string> req = 
+    new Dictionary<string, string>();
+
+    req.Add("Get", "2024");
+
+    string request = JsonSerializer.Serialize(req);
+    
+    using (var client = new RequestSocket())
+    {
+        client.Connect("tcp://localhost:5558");
+        client.SendFrame(request);
+        var msg = client.ReceiveFrameString();
+        return msg;
+    }
+});
+
+//generate lesson plan
 
 
 
