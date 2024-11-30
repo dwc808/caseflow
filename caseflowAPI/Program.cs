@@ -144,16 +144,41 @@ app.MapDelete("/student/{id}", async (caseFlowDb db, int id) =>
 ///////////Routes for reaching out to microservices via ZeroMQ////////////
 
 //generate a graph
+app.MapPost("graph", ([FromBody]Object data) => 
+{
+    string req = JsonSerializer.Serialize(data);
+    
+    using (var client = new RequestSocket())
+    {
+        client.Connect("tcp://localhost:5557");
+        client.SendFrame(req);
+        var msg = client.ReceiveFrameString();
 
+        //note that the image is received and sent to frontend as a base64 string
+
+        return msg;
+    } 
+});
 
 //run the schedule assistant
-
+app.MapPost("scheduler", ([FromBody]Object request) => 
+{
+   string req = JsonSerializer.Serialize(request);
+    
+    using (var client = new RequestSocket())
+    {
+        client.Connect("tcp://localhost:5556");
+        client.SendFrame(req);
+        var msg = client.ReceiveFrameString();
+        return msg;
+    } 
+});
 
 //report outcomes
 app.MapPost("/outcomes", ([FromBody]Object request) =>
 {
     string req = JsonSerializer.Serialize(request);
-    Console.WriteLine(request);
+    
     using (var client = new RequestSocket())
     {
         client.Connect("tcp://localhost:5558");
@@ -163,7 +188,7 @@ app.MapPost("/outcomes", ([FromBody]Object request) =>
     }
 });
 
-//get outcomes
+//get outcomes 
 app.MapGet("/outcomes", () =>
 {
     Dictionary<string, string> req = 
@@ -183,7 +208,17 @@ app.MapGet("/outcomes", () =>
 });
 
 //generate lesson plan
-
+app.MapPost("/lessonplan", ([FromBody]String prompt) =>
+{
+    
+    using (var client = new RequestSocket())
+    {
+        client.Connect("tcp://localhost:5555");
+        client.SendFrame(prompt);
+        var msg = client.ReceiveFrameString();
+        return msg;
+    }
+});
 
 
 app.Run();

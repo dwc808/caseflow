@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gwAU6tYdTN0=",
+  "dgSpecHash": "w3odBT4tSWo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\dc198\\Documents\\Core\\Projects\\caseflow\\caseFlowApi\\caseflowAPI.csproj",
+  "projectFilePath": "C:\\Users\\dc198\\Documents\\Core\\Projects\\caseflow\\caseflowapi\\caseflowAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dc198\\.nuget\\packages\\asyncio\\0.1.69\\asyncio.0.1.69.nupkg.sha512",
     "C:\\Users\\dc198\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

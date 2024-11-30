@@ -3,7 +3,7 @@ import os
 import zmq
 
 #make this environment variable later
-api_key = ""
+api_key = "AIzaSyC2UWrY0dqCWQJ7WwqTL83WKMcv2NpRXZc"
 
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel("gemini-1.5-flash")

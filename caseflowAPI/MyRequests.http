@@ -1,3 +1,85 @@
+POST http://localhost:5149/graph
+content-type: application/json
+
+    {
+    "labels": {
+        "title": "Math Progress",
+        "x-axis": "Date",
+        "y-axis": "DCPM"
+    },
+    "x-axis-data": [
+        "10/1",
+        "10/8",
+        "10/15"
+    ],
+    "y-axis-data": [
+        "13",
+        "16",
+        "15"
+    ]
+    }
+
+###
+POST http://localhost:5149/scheduler
+content-type: application/json
+
+        {"students":[
+            {
+              "id": 1,
+              "name": "Ryan",
+              "teacher": "Jennings",
+              "blocks": []
+            },
+            {
+              "id": 2,
+              "name": "Brian",
+              "teacher": "James",
+              "blocks": []
+            },
+            {
+              "id": 3,
+              "name": "Jeff",
+              "teacher": "Riley",
+              "blocks": []
+            },
+            {
+              "id": 4,
+              "name": "Marley",
+              "teacher": "Harris",
+              "blocks": []
+            },
+            {
+              "id": 5,
+              "name": "Jeff ",
+              "teacher": "Jenkins",
+              "blocks": []
+            },
+            {
+              "id": 5,
+              "name": "Tom ",
+              "teacher": "Jenkins",
+              "blocks": []
+            },
+            {
+              "id": 5,
+              "name": "Petey ",
+              "teacher": "Jenkins",
+              "blocks": []
+            }
+          ],
+            "teachertimes": {
+                "Jenkins": ["10:30", "11:00"],
+                "Harris": ["10:30", "12:30"],
+                "Jennings": ["1:00"],
+                "Riley": ["2:15"],
+                "James": ["9:00", "9:30", "11:30"]
+            }
+        }
+###
+POST http://localhost:5149/lessonplan
+content-type: application/json
+
+    "Write a lesson plan for a small group of 2nd graders learning to tell time to the nearest five minutes."
 ###
 POST http://localhost:5149/outcomes
 content-type: application/json

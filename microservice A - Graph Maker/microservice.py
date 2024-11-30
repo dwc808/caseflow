@@ -20,7 +20,7 @@ while True:
     print(data)
 
     # Assigns a JSON string to a variable.
-    json_data = json.loads(data)
+    json_data = data
 
     # Assigns a JSON file to a variable.
     # json = json.loads(data)
