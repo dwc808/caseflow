@@ -1,0 +1,23 @@
+.lessonplanner {
+    display: inline;
+}
+
+.lesson {
+    white-space: pre-line;
+    border-color: #2D5731;
+    border-width: 2px;
+    border-style: solid;
+    width: 50%;
+}
+
+.lessonplan {
+    padding: 8px;
+}
+
+pre{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    text-wrap: balance;
+}

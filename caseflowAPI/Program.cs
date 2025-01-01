@@ -151,6 +151,8 @@ app.MapPost("graph", ([FromBody]Object data) =>
     using (var client = new RequestSocket())
     {
         client.Connect("tcp://localhost:5557");
+        Console.WriteLine("Sending data");
+        Console.WriteLine(req);
         client.SendFrame(req);
         var msg = client.ReceiveFrameString();
 
@@ -161,18 +163,43 @@ app.MapPost("graph", ([FromBody]Object data) =>
 });
 
 //run the schedule assistant
-app.MapPost("scheduler", ([FromBody]Object request) => 
+app.MapPost("scheduler", async (caseFlowDb db, HttpContext context) => 
 {
-   string req = JsonSerializer.Serialize(request);
     
-    using (var client = new RequestSocket())
+    using (var reader = new StreamReader(context.Request.Body))
+    {
+        var body = await reader.ReadToEndAsync();
+        var jsonDocument = JsonDocument.Parse(body);
+        var root = jsonDocument.RootElement;
+
+        var teachertimes = root.GetProperty("teachertimes");
+        var students = await db.Students.ToListAsync();
+
+        
+
+        Dictionary<string, object> req = new Dictionary<string, object>
+        {
+            { "students", students },
+            { "teachertimes", teachertimes }
+        };
+
+        string dict = JsonSerializer.Serialize(req);
+        
+
+        using (var client = new RequestSocket())
     {
         client.Connect("tcp://localhost:5556");
-        client.SendFrame(req);
+        Console.WriteLine("Sending data");
+        Console.WriteLine(dict);
+        client.SendFrame(dict);
         var msg = client.ReceiveFrameString();
         return msg;
     } 
+    }
 });
+
+    
+
 
 //report outcomes
 app.MapPost("/outcomes", ([FromBody]Object request) =>
@@ -182,6 +209,8 @@ app.MapPost("/outcomes", ([FromBody]Object request) =>
     using (var client = new RequestSocket())
     {
         client.Connect("tcp://localhost:5558");
+        Console.WriteLine("Sending data");
+        Console.WriteLine(req);
         client.SendFrame(req);
         var msg = client.ReceiveFrameString();
         return msg;
@@ -201,6 +230,8 @@ app.MapGet("/outcomes", () =>
     using (var client = new RequestSocket())
     {
         client.Connect("tcp://localhost:5558");
+        Console.WriteLine("Sending data");
+        Console.WriteLine(request);
         client.SendFrame(request);
         var msg = client.ReceiveFrameString();
         return msg;
@@ -208,14 +239,19 @@ app.MapGet("/outcomes", () =>
 });
 
 //generate lesson plan
-app.MapPost("/lessonplan", ([FromBody]String prompt) =>
+app.MapPost("/lessonplan", ([FromBody]Object request) =>
 {
-    
+    var prompt = JsonSerializer.Serialize(request);
+
     using (var client = new RequestSocket())
     {
         client.Connect("tcp://localhost:5555");
+        Console.WriteLine("Sending data");
+        Console.WriteLine(prompt);
         client.SendFrame(prompt);
+        
         var msg = client.ReceiveFrameString();
+        
         return msg;
     }
 });

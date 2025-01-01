@@ -16,13 +16,16 @@ socket.bind("tcp://*:5555")
 #wait for request
 while True:
     message = socket.recv()
+    print("Message received.")
     message = message.decode()
+    print(message)
+
     #if message wasn't empty, send to Gemini
     if len(message) != 0:
         response = model.generate_content(message)
 
     response = response.text
-    print(response)
+    print("Sending response: " + response)
     response = response.encode()
 
     #send lesson plan back to client

@@ -13,8 +13,18 @@ while True:
 
     #break data into separate structures
     dict = json.loads(message)
+    print("Received")
+    print(dict)
     studentlist = dict["students"]
-    teachertimes = dict["teachertimes"]
+    teachtimes = dict["teachertimes"]
+
+    teachertimes = {}
+
+    #clean up teachertimes to remove 'name' key
+    for entry in teachtimes:
+        teachertimes[entry["name"]] = entry["times"]
+
+
 
     #if message wasn't empty, parse list to build dictionary with teacher rosters
     if len(studentlist) != 0:
@@ -24,10 +34,10 @@ while True:
 
         try:
             for student in studentlist:
-                if student["teacher"] in rosters.keys():
-                    rosters[student["teacher"]].append(student["name"])
+                if student["Teacher"] in rosters.keys():
+                    rosters[student["Teacher"]].append(student["Name"])
                 else:
-                    rosters[student["teacher"]] = [student["name"]]
+                    rosters[student["Teacher"]] = [student["Name"]]
 
         #create dictionary of time with students
 
@@ -44,18 +54,21 @@ while True:
     try:
     #match students to available blocks based on their teacher
         for teacher in rosters.keys():
-            for time in teachertimes[teacher]:
-                if time not in blocks.keys():
-                    blocks[time] = []
-                for student in rosters[teacher]:
-                    blocks[time].append(student)
+            #exception here - how to read this now
+            if teacher in teachertimes:
+                for time in teachertimes[teacher]:
+                    if time not in blocks.keys():
+                        blocks[time] = []
+                    for student in rosters[teacher]:
+                        blocks[time].append(student)
 
-        print(blocks)
+
 
     except:
         socket.send(b"Unknown error occurred")
 
     #send dictionary of blocks with available students back to client
     response = json.dumps(blocks)
+    print("Sending blocks: " + response)
     response = response.encode()
     socket.send(response)

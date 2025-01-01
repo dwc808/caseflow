@@ -14,3 +14,18 @@ header {
     margin-left: 5%;
     font-size: 300%;
   }
+
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .navbutton {
+    height: 75px;
+    width: 100px;
+    margin-left: 3px;
+    margin-right: 3px;
+  }

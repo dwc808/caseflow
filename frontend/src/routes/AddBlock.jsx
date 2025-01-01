@@ -6,17 +6,19 @@ import '../assets/styles/AddBlock.css'
 /*hardcode in api endpoints for now?*/
 const url = 'http://localhost:5149/addblock'
 
-const Cancel = () => {
-    if (window.confirm('Are you sure you want to go back?')) {
-        navigate('/home')
-    }
-}
+
 
 export default function AddBlock() {
     
     const {register, handleSubmit} = useForm();
     const navigate = useNavigate(); 
     
+    const Cancel = () => {
+        if (window.confirm('Are you sure you want to go back?')) {
+            navigate('/home')
+        }
+    }
+
     return (
         
         <>

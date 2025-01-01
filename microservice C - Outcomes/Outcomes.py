@@ -19,6 +19,10 @@ while True:
     message = message.decode()
     request = json.loads(message)
 
+    print("Received:")
+    print(request)
+
+
     #open existing data
     with open('outcomes.json', 'r') as file:
         data = json.load(file)
@@ -29,9 +33,15 @@ while True:
         #send data to clien
         data = json.dumps(data)
         data = data.encode()
+        print("Sending data: ")
+        print(data)
         socket.send(data)
 
     else:
+
+        #temporary fix - add year here
+        request = request["outcomes"]
+        request = {"2024":request}
 
         #add blank entry for year if first time
         if year not in data:
@@ -39,7 +49,7 @@ while True:
 
         #update outcomes with incoming data
         for event in request[year].keys():
-            data[year][event] = data[year].get(event, 0) + request[year][event]
+            data[year][event] = data[year].get(event, 0) + int(request[year][event])
 
         print(data)
 
@@ -48,6 +58,7 @@ while True:
         with open('outcomes.json', 'w') as file:
             file.write(save_data)
 
+        print("Updated data. Sending confirmation. New data: " + save_data)
         socket.send(b"Data successfully entered.")
 
 

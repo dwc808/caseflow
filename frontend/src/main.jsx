@@ -11,6 +11,10 @@ import AddStudent from "./routes/AddStudent"
 import AddBlock from "./routes/AddBlock"
 import AddStudentsToBlock from './routes/AddStudentsToBlock'
 import AddStudentToBlocks from './routes/AddStudentToBlocks'
+import Lesson from './routes/Lesson'
+import Graph from './routes/Graph'
+import Outcomes from './routes/Outcomes'
+import Scheduler from './routes/Scheduler'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -54,6 +58,22 @@ const router = createBrowserRouter([
       {
         path: "addblock",
         element: <AddBlock />
+      },
+      {
+        path: "graph",
+        element: <Graph />
+      },
+      {
+        path: "scheduler",
+        element: <Scheduler />
+      },
+      {
+        path: "outcomes",
+        element: <Outcomes />
+      },
+      {
+        path: "lessonplan",
+        element: <Lesson />
       }
     ]
   },
